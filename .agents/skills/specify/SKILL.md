@@ -28,12 +28,13 @@ disable-model-invocation: true
 
 1. READ 需要切分故事或需求歸戶時，讀取 `rules/使用者故事切分與優先級判準.md` 與 `rules/FR與NFR歸戶到UserStory與全域需求判準.md`。
 2. THINK 依已載入規則收斂可獨立驗證的 User Stories、Priority、驗收情境、故事專屬 FR / NFR、全域需求、邊界情況、關鍵實體、成功標準與假設。
-3. THINK 對涉及既有 truth 的需求，明確標示它預期是新增、修改或刪除現有系統行為，但不在本 skill 寫入 truth。
+3. THINK 把輸入裡的舉例說明、證明點、狀態與公式寫入對應項目：舉例不得壓成一句摘要，同一則舉例只掛在它真正說明的項目，每個故事要證明的事必須能從故事、舉例與驗收對上；輸入若有狀態或數量公式，必須讓審查找得到且與對應需求一致。輸入沒有的就省略，不要求特定區塊名稱。
+4. THINK 對涉及既有 truth 的需求，明確標示它預期是新增、修改或刪除現有系統行為，但不在本 skill 寫入 truth。
 
 ## Phase 4 -- 產出 plan artifacts 並自檢
 
 1. WRITE 將 spec 寫入 `specs/plans/NNN-<slug>/spec.md`，將 checklist 寫入 `specs/plans/NNN-<slug>/checklists/requirements.md`。
-2. READ 讀取 `rules/spec完整性與一致性自檢判準.md`，檢查使用者故事、FR / NFR、驗收情境、邊界情況、成功標準、假設與剩餘 clarify 缺口是否一致；若不符合，立即修正。
+2. READ 讀取 `rules/spec完整性與一致性自檢判準.md`，檢查使用者故事、FR / NFR、驗收情境、邊界情況、成功標準、假設、剩餘 clarify 缺口，以及 checklist「舉例、證明點與狀態公式」四條是否一致；若不符合，立即修正。
 
 ## Phase 5 -- 交付後續 handoff
 
