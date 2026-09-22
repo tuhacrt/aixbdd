@@ -10,6 +10,7 @@
 - Phase 2 `Foundational` 只建立後續實作程式、測試共用元件、入口、fixture、helper 與落點骨架。
 - Phase 3 `Test Alignment & Implementation` 的目的：在寫產品碼之前，先把本輪所有受影響 DSL 的自動化測試對齊最新版 truth。
 - Truth 參照必須使用 `specs/truth/**` 路徑；plan 參照才使用當前 plan package 內相對路徑。
+- Feature `Shared Must Read` 除 feature、同模組 DSL、對應 `truth-delta` 列外，還必須列入回追到的 planner 產物。
 
 ## Phase 1: Setup
 
@@ -115,6 +116,7 @@
 - `specs/truth/features/{{INTERFACE_KIND}}/{{MODULE}}/{{ADDED_FEATURE_FILE_NAME}}.feature` -> `Feature: {{ADDED_FEATURE_TITLE}}`
 - `specs/truth/features/{{INTERFACE_KIND}}/{{MODULE}}/dsl.md` -> `{{ADDED_DSL_REQUIRED_SECTIONS}}`
 - `truth-delta.md` -> `{{ADD_TRUTH_DELTA_ROWS}}`
+{{FEATURE_CHASED_ARTIFACTS}}
 
 **Boundary**:
 - {{ADD_BOUNDARY_RULE}}
@@ -133,6 +135,7 @@
 - `specs/truth/features/{{INTERFACE_KIND}}/{{MODULE}}/{{MODIFIED_FEATURE_FILE_NAME}}.feature` -> `Feature: {{MODIFIED_FEATURE_TITLE}}`
 - `specs/truth/features/{{INTERFACE_KIND}}/{{MODULE}}/dsl.md` -> `{{MODIFIED_DSL_REQUIRED_SECTIONS}}`
 - `truth-delta.md` -> `{{MODIFY_TRUTH_DELTA_ROWS}}`
+{{FEATURE_CHASED_ARTIFACTS}}
 
 **Boundary**:
 - {{MODIFY_BOUNDARY_RULE}}
@@ -151,6 +154,7 @@
 - `specs/truth/features/{{INTERFACE_KIND}}/{{MODULE}}/{{DELETED_FEATURE_FILE_NAME}}.feature` -> `Feature: {{DELETED_FEATURE_TITLE}}`
 - `specs/truth/features/{{INTERFACE_KIND}}/{{MODULE}}/dsl.md` -> `{{DELETE_DSL_SECTIONS}}`
 - `truth-delta.md` -> `{{DELETE_TRUTH_DELTA_ROWS}}`
+{{FEATURE_CHASED_ARTIFACTS}}
 - `{{OBSOLETE_PRODUCT_CODE_PATH}}` -> {{OBSOLETE_PRODUCT_BEHAVIOR}}
 
 **Boundary**:
@@ -161,3 +165,16 @@
 
 - [ ] T{{CODE_REMOVE_TASK_ID}} [CODE-REMOVE] {{CODE_REMOVE_TASK_TITLE}}
 - [ ] T{{REGRESSION_TASK_ID}} [REGRESSION] 跑 Test Scope，確認新版 truth 成立
+
+## Phase 4{{PLAN_SIDE_GATE_LETTER}}: {{PLAN_SIDE_ARTIFACT_FAMILY}} quality gate
+
+**Goal**: 產品對齊本輪回追到的 plan-side 產物。`Test Scope` 全綠不能代替本題。
+
+**Read**:
+- {{PLAN_SIDE_GATE_READS}}
+
+**Boundary**:
+- 不改 truth、不加 feature、不重跑 GREEN 當通過條件。
+- 本輪沒有 plan-side 產物時省略整個 phase。
+
+- [ ] T{{PLAN_SIDE_GATE_TASK_ID}} subagent review ({{PLAN_SIDE_GATE_NAME}} quality gate)

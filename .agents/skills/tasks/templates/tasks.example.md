@@ -10,6 +10,7 @@
 - Phase 2 `Foundational` 只建立後續實作程式、測試共用元件、入口、fixture、helper 與落點骨架。
 - Phase 3 `Test Alignment & Implementation` 的目的：在寫產品碼之前，先把本輪所有受影響 DSL 的自動化測試對齊最新版 truth。
 - Truth 參照必須使用 `specs/truth/**` 路徑；plan 參照才使用當前 plan package 內相對路徑。
+- Feature `Shared Must Read` 除 feature、同模組 DSL、對應 `truth-delta` 列外，還必須列入回追到的 planner 產物。
 
 ## Phase 1: Setup
 
@@ -129,6 +130,7 @@
 - `specs/truth/features/backend/房間聊天/單人等待與空白訊息拒絕.feature` -> `Feature: 單人等待與空白訊息拒絕`
 - `specs/truth/features/backend/房間聊天/dsl.md` -> `Given: "{玩家}" 在房間內單人等待`, `When: "{玩家}" 嘗試送出空白訊息`, `Then: 這次聊天送出被拒絕`
 - `truth-delta.md` -> `/dsl-refine` ADD 單人等待與空白訊息拒絕
+- `specs/truth/contracts/groups/房間聊天.yaml` -> `sendMessage` 空白拒絕
 
 **Boundary**:
 - 只處理單人等待與空白拒絕，不處理開局延續或離開清空。
@@ -175,3 +177,37 @@
 
 - [ ] T020 [CODE-REMOVE] 移除產品碼中保留離房訊息的過期分支
 - [ ] T021 [REGRESSION] 跑 Test Scope，確認新版 truth 成立
+
+## Phase 4D: ADD Feature File - frontend/房間對戰/登入與送訊畫面.feature
+
+**Goal**: 以最小產品行為讓此 feature file 全綠。
+
+**Shared Must Read**:
+- `specs/truth/features/frontend/房間對戰/登入與送訊畫面.feature` -> `Feature: 登入與送訊畫面`
+- `specs/truth/features/frontend/房間對戰/dsl.md` -> 本檔 Given／When／Then 全部列
+- `truth-delta.md` -> `/dsl-refine` ADD `frontend/房間對戰/登入與送訊畫面.feature`
+- `ui/ui-plan.md` -> 房間對戰畫面的視覺方向、畫面與流程
+- `ui/index.html` -> 房間對戰雛形全文
+
+**Boundary**:
+- 只讓此 Test Scope 全綠。畫面必須對齊該雛形。
+
+**Test Scope**:
+- `specs/truth/features/frontend/房間對戰/登入與送訊畫面.feature`
+
+- [ ] T022 [BDD-GREEN] 讓 Test Scope 全綠
+- [ ] T023 [BDD-REFACTOR] 在綠燈下整理此 feature 的產品碼與測試 helper
+
+## Phase 4E: ui quality gate
+
+**Goal**: 產品對齊本輪回追到的 plan-side 產物。`Test Scope` 全綠不能代替本題。
+
+**Read**:
+- `ui/ui-plan.md` -> 視覺方向
+- `ui/index.html`
+- `frontend/src/pages/`
+
+**Boundary**:
+- 不改 truth、不加 feature、不重跑 GREEN 當通過條件。
+
+- [ ] T024 subagent review (ui quality gate)

@@ -36,10 +36,12 @@ disable-model-invocation: true
 1. THINK 對 `ADD` 的 truth interface feature file，建立 `[BDD-GREEN] -> [BDD-REFACTOR]`，並宣告 `Test Scope`。
 2. THINK 對 `MODIFY` 的 truth interface feature file，建立 `[BDD-GREEN] -> [BDD-REFACTOR]`，並宣告 `Test Scope`。
 3. THINK 對 `DELETE` 的 truth interface feature file、Rule、Example 或 DSL 句型，建立 `[CODE-REMOVE] -> [REGRESSION]`，並宣告 `Test Scope`。
-4. THINK 為每個 Feature phase 填入 `Shared Must Read`、`Boundary` 與 `Test Scope`；未使用介面根共用 DSL row 時省略根 DSL 參照。truth 參照必須使用 `specs/truth/**` 路徑。
-5. THINK 若驗收情境無法被現有 truth feature、同模組 DSL 與相關共用 DSL rows 唯一承接，停止受影響範圍並回交 `/dsl-refine`。
+4. READ 讀取 `rules/Feature約束從plan介面回追.md`，確認 Feature `Shared Must Read` 如何從 `truth-delta` 列回追 `plan.md` 介面與 planner 產物，以及 plan-side quality gate 何時出現。
+5. THINK 為每個 Feature phase 填入 `Shared Must Read`、`Boundary` 與 `Test Scope`：先寫 feature、同模組 DSL、該 `/dsl-refine` 列，再依已載入規則補上該介面 planner 產物；未使用介面根共用 DSL row 時省略根 DSL。truth 參照使用 `specs/truth/**`；plan-side 參照使用 plan package 相對路徑。若回追點名的產物不存在，停止受影響範圍並回交該 planner。
+6. THINK 依已載入規則，在最後一個用到各 plan-side 產物的 Feature phase 之後，為每個產物家族各加一題 `subagent review (<產物名> quality gate)`。
+7. THINK 若驗收情境無法被現有 truth feature、同模組 DSL 與相關共用 DSL rows 唯一承接，停止受影響範圍並回交 `/dsl-refine`。
 
 ## Phase 5 -- 輸出並驗證 tasks.md
 
-1. WRITE 依 template 骨架輸出 `specs/plans/NNN-<slug>/tasks.md`。
-2. READ 回頭檢查：任務皆為 `- [ ] T###`、truth-delta 已納入 Core Inputs、沒有 Impact Audit phase、有新增技術時 Setup 寫清套件名與 smoke-test、Foundational 每則有「只做／不做」、Phase 3 已集中 ALIGN / REMOVE / RED、Feature phase 不含 `[BDD-RED]` / `[BDD-ALIGN]` / `[BDD-REMOVE]`、每個 Feature phase 有 `Test Scope`、truth 路徑都指向 `specs/truth/**`；若不符合，立即修正。
+1. WRITE 先讀取 `templates/tasks.md` 與 `templates/tasks.example.md`，再依骨架複製結構、參考範例改寫填位符號與具體內容，輸出 `specs/plans/NNN-<slug>/tasks.md`。
+2. READ 回頭檢查：任務皆為 `- [ ] T###`、truth-delta 已納入 Core Inputs、沒有 Impact Audit phase、有新增技術時 Setup 寫清套件名與 smoke-test、Foundational 每則有「只做／不做」、Phase 3 已集中 ALIGN / REMOVE / RED、Feature phase 不含 `[BDD-RED]` / `[BDD-ALIGN]` / `[BDD-REMOVE]`、每個 Feature phase 有 `Test Scope`、Feature `Shared Must Read` 含回追產物、每個 plan-side 產物家族在最後一個消費者之後有 quality gate、truth 參照指向 `specs/truth/**`、plan-side 參照只有回追產出時才出現；若不符合，立即修正。
