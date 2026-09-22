@@ -13,8 +13,7 @@ disable-model-invocation: true
 ## Phase 1 -- 對齊 API truth 與 plan handoff
 
 1. READ 讀取使用者需求、呼叫者 handoff、plan package 的 `spec.md`、`research.md`、`plan.md`、`truth-delta.md`、`specs/truth/techstack.md`、既有 `specs/truth/contracts/**` 與指定後端 / API 介面名稱。
-2. READ 讀取 `templates/openapi.yaml` 與 `templates/openapi.example.yaml`，確認 contract artifact 的固定結構與完成樣貌。
-3. READ 讀取 `.agents/constitution/CONSTITUTION.md`、`.agents/constitution/shared.md` 與 `.agents/constitution/skills/api-plan/openapi.md`。
+2. READ 讀取 `.agents/constitution/CONSTITUTION.md`、`.agents/constitution/shared.md` 與 `.agents/constitution/skills/api-plan/openapi.md`。
 
 ## Phase 2 -- 盤點 API ADD / MODIFY / DELETE
 
@@ -23,9 +22,11 @@ disable-model-invocation: true
 
 ## Phase 3 -- 更新 API truth
 
-1. WRITE 直接更新 `specs/truth/contracts/**`，使 API truth 成為目前完整系統契約，不留下「仍以某 plan 契約為準」的分散引用。
-2. READ 回頭檢查 contract 是否符合已載入憲法、指定介面需求與既有 truth 的相容性；若不符合，立即修正。
-3. THINK 將 API truth 改動整理為語意單元層級的 ADD / MODIFY / DELETE / NOOP 列。
+1. READ 需要確認契約怎麼拆檔時，讀取 `rules/OpenAPI須拆component與api-group.md`。
+2. READ 若要寫入契約檔，先讀取 `templates/openapi.yaml` 與 `templates/openapi.example.yaml`、`templates/groups/api-group.yaml` 與 `templates/groups/api-group.example.yaml`、`templates/components/parameters.yaml` 與 `templates/components/parameters.example.yaml`、`templates/components/schemas.yaml` 與 `templates/components/schemas.example.yaml`，再依骨架複製結構、參考範例對照完成品。
+3. WRITE 直接更新 `specs/truth/contracts/**`，依已載入規則拆根檔、api group 與 component，使 API truth 成為目前完整系統契約，不留下「仍以某 plan 契約為準」的分散引用。
+4. READ 回頭檢查 contract 是否符合已載入憲法、指定介面需求、已載入拆檔規則與既有 truth 的相容性；若不符合，立即修正。
+5. THINK 將 API truth 改動整理為語意單元層級的 ADD / MODIFY / DELETE / NOOP 列。
 
 ## Phase 4 -- 更新 truth-delta 並交付
 

@@ -1,56 +1,25 @@
+# 根檔只掛 info、tags 與 $ref。groups 預設一層；超過 10 個 yaml 才再開該層。
 openapi: 3.0.3
 info:
   title: {{API_TITLE}}
   version: {{API_VERSION}}
   description: {{API_DESCRIPTION}}
+tags:
+  - name: {{API_GROUP_1_NAME}}
+    description: {{API_GROUP_1_DESCRIPTION}}
+  - name: {{API_GROUP_2_NAME}}
+    description: {{API_GROUP_2_DESCRIPTION}}
 paths:
   {{PATH_1}}:
-    {{METHOD_1}}:
-      summary: {{METHOD_1_SUMMARY}}
-      description: {{METHOD_1_DESCRIPTION}}
-      operationId: {{METHOD_1_OPERATION_ID}}
-      tags:
-        - {{METHOD_1_TAG}}
-      requestBody:
-        required: {{METHOD_1_REQUEST_REQUIRED}}
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/{{METHOD_1_REQUEST_SCHEMA}}'
-      responses:
-        '{{METHOD_1_SUCCESS_STATUS}}':
-          description: {{METHOD_1_SUCCESS_DESCRIPTION}}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/{{METHOD_1_RESPONSE_SCHEMA}}'
-        '{{METHOD_1_ERROR_STATUS}}':
-          description: {{METHOD_1_ERROR_DESCRIPTION}}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/{{ERROR_SCHEMA}}'
-      x-realtime-note: {{METHOD_1_REALTIME_NOTE}}
+    $ref: ./groups/{{API_GROUP_1_FILE}}.yaml#/{{PATH_1_OPERATION_ID}}
+  {{PATH_2}}:
+    $ref: ./groups/{{API_GROUP_2_FILE}}.yaml#/{{PATH_2_OPERATION_ID}}
 components:
+  parameters:
+    {{PARAMETER_1_NAME}}:
+      $ref: ./components/parameters.yaml#/{{PARAMETER_1_NAME}}
   schemas:
-    {{METHOD_1_REQUEST_SCHEMA}}:
-      type: object
-      required:
-        - {{REQUEST_REQUIRED_FIELD}}
-      properties:
-        {{REQUEST_REQUIRED_FIELD}}:
-          type: {{REQUEST_REQUIRED_FIELD_TYPE}}
-    {{METHOD_1_RESPONSE_SCHEMA}}:
-      type: object
-      properties:
-        {{RESPONSE_FIELD_1}}:
-          type: {{RESPONSE_FIELD_1_TYPE}}
-    {{ERROR_SCHEMA}}:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-
-# 依實際操作數量增減 paths 與 schema 區塊。
+    {{SHARED_SCHEMA_NAME}}:
+      $ref: ./components/schemas/shared.yaml#/{{SHARED_SCHEMA_NAME}}
+    {{GROUP_1_SCHEMA_NAME}}:
+      $ref: ./components/schemas/{{API_GROUP_1_FILE}}.yaml#/{{GROUP_1_SCHEMA_NAME}}
